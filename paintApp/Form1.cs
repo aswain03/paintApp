@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -171,6 +172,19 @@ namespace paintApp
         private void btn_fill_Click(object sender, EventArgs e)
         {
             index = 7;
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.Filter = "Image(*.jpg)|*.jpg|(*.*|*.*";
+
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap btm = bm.Clone(new Rectangle(0, 0, pic.Width, pic.Height), bm.PixelFormat);
+                btm.Save(sfd.FileName, ImageFormat.Jpeg);
+                MessageBox.Show("Image saved");
+            }
         }
 
         private void btn_pencil_Click(object sender, EventArgs e)
